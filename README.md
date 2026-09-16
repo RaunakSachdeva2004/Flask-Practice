@@ -13,12 +13,12 @@ This project serves as a structured practice ground for exploring core Flask con
 ## 🚀 Features & Roadmap
 
 - [x] Basic WSGI application setup & routing (`/`)
-- [ ] Dynamic routing & URL parameters
-- [ ] Jinja2 templating & HTML rendering
-- [ ] Handling GET & POST requests and form data
-- [ ] Building RESTful APIs with JSON responses
-- [ ] Error handling & custom HTTP status codes
-- [ ] Integration with ML inference pipelines
+- [x] Dynamic routing & URL parameters
+- [x] Jinja2 templating & HTML rendering
+- [x] Handling GET & POST requests and form data
+- [x] Building RESTful APIs with JSON responses
+- [x] Error handling & custom HTTP status codes
+- [x] Integration with ML inference pipelines
 
 ---
 
