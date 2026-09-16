@@ -10,11 +10,18 @@ This module demonstrates MLOps best practices for serving ML models via Flask:
 """
 
 import os
+import sys
 import time
 import joblib
 import numpy as np
 from flask import Flask, jsonify, request, abort
-from train_model import train_and_save_pipeline, MODEL_PATH
+
+# Ensure imports resolve whether running from project root or inside 05_ml_pipeline/
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+if SCRIPT_DIR not in sys.path:
+    sys.path.insert(0, SCRIPT_DIR)
+
+from train_model import train_and_save_pipeline, DEFAULT_MODEL_PATH
 
 app = Flask(__name__)
 
@@ -26,10 +33,10 @@ def get_model():
     """Load the model pipeline once into memory, training on the fly if needed."""
     global MODEL_ARTIFACT
     if MODEL_ARTIFACT is None:
-        if not os.path.exists(MODEL_PATH):
-            print(f"Artifact {MODEL_PATH} not found. Generating model artifact...")
-            train_and_save_pipeline(MODEL_PATH)
-        MODEL_ARTIFACT = joblib.load(MODEL_PATH)
+        if not os.path.exists(DEFAULT_MODEL_PATH):
+            print(f"Artifact {DEFAULT_MODEL_PATH} not found. Generating model artifact...")
+            train_and_save_pipeline(DEFAULT_MODEL_PATH)
+        MODEL_ARTIFACT = joblib.load(DEFAULT_MODEL_PATH)
         print("ML Pipeline loaded successfully into memory.")
     return MODEL_ARTIFACT
 

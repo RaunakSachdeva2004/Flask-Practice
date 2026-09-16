@@ -1,5 +1,6 @@
 """
 Training Script for ML Inference Pipeline
+----------------------------------------
 Trains a classification pipeline (StandardScaler + LogisticRegression)
 on the Iris dataset and exports the serialized model artifact.
 """
@@ -13,9 +14,11 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 
-MODEL_PATH = "model.joblib"
+DEFAULT_MODELS_DIR = os.path.join(os.path.dirname(__file__), "models")
+DEFAULT_MODEL_PATH = os.path.join(DEFAULT_MODELS_DIR, "model.joblib")
 
-def train_and_save_pipeline(output_path=MODEL_PATH):
+
+def train_and_save_pipeline(output_path=DEFAULT_MODEL_PATH):
     print("Loading Iris dataset...")
     data = load_iris()
     X, y = data.data, data.target
@@ -49,9 +52,11 @@ def train_and_save_pipeline(output_path=MODEL_PATH):
         "accuracy": accuracy
     }
 
+    os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
     joblib.dump(model_artifact, output_path)
     print(f"Pipeline successfully saved to {output_path}")
     return model_artifact
+
 
 if __name__ == "__main__":
     train_and_save_pipeline()
