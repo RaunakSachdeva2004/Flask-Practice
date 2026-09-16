@@ -1,10 +1,7 @@
 # Building url dynamically
 from flask import Flask,render_template,request
 
-'''
-it will create the instance of the flask class, 
-which will be the WSGI application
-'''
+
 ## WSGI APPLICATION
 app = Flask(__name__)
 
@@ -45,7 +42,3 @@ def success(score):
 
 if __name__ == "__main__":
     app.run(debug=True)
- 
-
-
-# JiNJA 2 template engine
